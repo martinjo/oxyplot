@@ -18,6 +18,13 @@ namespace OxyPlot.Wpf
     /// </summary>
     public class MagnitudeAxis : LinearAxis
     {
+
+        /// <summary>
+        /// Identifies the <see cref="StartAngle"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty AxisAngleProperty =
+            DependencyProperty.Register("AxisAngle", typeof(double), typeof(MagnitudeAxis), new PropertyMetadata(0d, AppearanceChanged));
+
         /// <summary>
         /// Initializes static members of the <see cref = "MagnitudeAxis" /> class.
         /// </summary>
@@ -36,6 +43,26 @@ namespace OxyPlot.Wpf
         public MagnitudeAxis()
         {
             this.InternalAxis = new Axes.MagnitudeAxis();
+        }
+
+
+        /// <summary>
+        /// Gets or sets the axis angle (degrees).
+        /// </summary>
+        public double AxisAngle
+        {
+            get { return (double)this.GetValue(AxisAngleProperty); }
+            set { this.SetValue(AxisAngleProperty, value); }
+        }
+
+             /// <summary>
+        /// Synchronizes the properties.
+        /// </summary>
+        protected override void SynchronizeProperties()
+        {
+ 	         base.SynchronizeProperties();
+             var a = (Axes.MagnitudeAxis)this.InternalAxis;
+             a.AxisAngle = this.AxisAngle;
         }
     }
 }

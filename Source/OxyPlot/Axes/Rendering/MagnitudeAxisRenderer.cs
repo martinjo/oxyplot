@@ -47,11 +47,11 @@ namespace OxyPlot.Axes
 
             angleAxis.UpdateActualMaxMin();
 
-            var majorTicks = this.MajorTickValues.Where(x => x > axis.ActualMinimum && x <= axis.ActualMaximum).ToArray();
+            var majorTicks = MajorTickValues.Where(x => x > axis.ActualMinimum && x <= axis.ActualMaximum).ToArray();
 
             if (pass == 0 && this.MinorPen != null)
             {
-                var minorTicks = this.MinorTickValues.Where(x => x >= axis.ActualMinimum && x <= axis.ActualMaximum && !majorTicks.Contains(x)).ToArray();
+                var minorTicks = MinorTickValues.Where(x => x >= axis.ActualMinimum && x <= axis.ActualMaximum && !majorTicks.Contains(x)).ToArray();
 
                 foreach (var tickValue in minorTicks)
                 {
@@ -212,7 +212,7 @@ namespace OxyPlot.Axes
             VerticalAlignment va;
             GetTickTextAligment(actualAngle, out ha, out va);
 
-            var pt = axis.Transform(x, angleAxis.Angle, angleAxis);
+            var pt = axis.Transform(x, ((MagnitudeAxis)axis).AxisAngle * Math.PI/180 , angleAxis);
             pt = new ScreenPoint(pt.X + dx, pt.Y + dy);
 
             string text = axis.FormatValue(x);

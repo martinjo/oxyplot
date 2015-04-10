@@ -17,6 +17,11 @@ namespace OxyPlot.Axes
     public class MagnitudeAxis : LinearAxis
     {
         /// <summary>
+        /// Gets or sets the orientation angle (degrees) for the axis. The default value is <c>0</c>.
+        /// </summary>
+        public double AxisAngle { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MagnitudeAxis" /> class.
         /// </summary>
         public MagnitudeAxis()
@@ -27,6 +32,30 @@ namespace OxyPlot.Axes
 
             this.MajorGridlineStyle = LineStyle.Solid;
             this.MinorGridlineStyle = LineStyle.Solid;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MagnitudeAxis" /> class.
+        /// </summary>
+        /// <param name="minimum">The minimum.</param>
+        /// <param name="maximum">The maximum.</param>
+        /// <param name="majorStep">The major step.</param>
+        /// <param name="minorStep">The minor step.</param>
+        /// <param name="title">The title.</param>
+        [Obsolete]
+        public MagnitudeAxis(
+            double minimum = double.NaN,
+            double maximum = double.NaN,
+            double majorStep = double.NaN,
+            double minorStep = double.NaN,
+            string title = null)
+            : this()
+        {
+            this.Minimum = minimum;
+            this.Maximum = maximum;
+            this.MajorStep = majorStep;
+            this.MinorStep = minorStep;
+            this.Title = title;
         }
 
         /// <summary>
